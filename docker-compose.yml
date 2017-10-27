@@ -1,0 +1,35 @@
+version: '2'
+services:
+  nginx:
+    image: evild/alpine-nginx:1.9.15-openssl
+    container_name: nginx
+    links:
+      - php
+    volumes:
+      - ./www/:/var/www/html/:ro
+      - ./nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    ports:
+      - 80:80
+      - 443:443
+  php:
+    image: hayko18/php7-mongo
+    container_name: php
+    volumes:
+      - ./www/:/var/www/html
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    build: ./mongodb
+    container_name: mongodb
+    volumes:
+      - ./mongodb/:/data/mongodb
+    environment:
+      - MONGODB_ADMIN_USER=admin
+      - MONGODB_ADMIN_PASS=admin
+      - MONGODB_APPLICATION_DATABASE=api
+      - MONGODB_APPLICATION_USER=adminapi
+      - MONGODB_APPLICATION_PASS=admin
