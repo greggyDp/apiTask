@@ -7,9 +7,8 @@ $mongoDbConfig = require(__DIR__ . '/mongodb.php');
 
 return [
     'mongodb' => $mongoDbConfig,
-
     'request' => [
-        'cookieValidationKey' => 'S8K_G9z3A4Yz6Nh1jB96Cql0eYtXWusT', //todo need?
+        'cookieValidationKey' => 'S8K_G9z3A4Yz6Nh1jB96Cql0eYtXWusT',
         'parsers' => [
             'application/json' => 'yii\web\JsonParser',
         ]
@@ -18,8 +17,8 @@ return [
         'class' => 'yii\caching\FileCache',
     ],
     'user' => [
-        'identityClass' => 'app\models\User',
-        'enableAutoLogin' => true,
+        'identityClass' => 'app\common\models\UserIdentityModel',
+        'enableAutoLogin' => false,
     ],
     'errorHandler' => [
         'errorAction' => 'docs/error',
@@ -35,13 +34,14 @@ return [
     ],
     'urlManager' => [
         'enablePrettyUrl'     => true,
-        'enableStrictParsing' => true,
+        'enableStrictParsing' => false,
         'showScriptName'      => false,
 
         'rules' => [
             '/' => 'docs/index',
-            ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/user', 'v1/post']],
-            ['class' => 'yii\rest\UrlRule', 'controller' => ['v2/user', 'v2/post']]
+
+            ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/user', 'v1/request']],
+            ['class' => 'yii\rest\UrlRule', 'controller' => ['v2/user', 'v2/request']]
         ],
     ],
 ];

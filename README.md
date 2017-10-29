@@ -4,7 +4,7 @@
 
 * Install [docker](https://www.docker.com/products/overview) and [docker compose](https://docs.docker.com/compose/install/)
 * Clone this repository
-* Run ```docker-compose up```
+* Run ```docker-compose && docker-compose up && docker-compose exec -t -i php /bin/bash``` => and u in work dir! run ```composer update && ./yii migrate```
 
 ## License
 

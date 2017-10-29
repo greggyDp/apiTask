@@ -3,8 +3,9 @@
  * Array of application config file
  */
 
-$versioningModulesConfig = require(__DIR__ . '/mongodb.php');
+$versioningModulesConfig = require(__DIR__ . '/versioningModules.php');
 $appComponentsConfig     = require(__DIR__ . '/appComponents.php');
+$appParams               = require(__DIR__ . '/params.php');
 
 $config = [
     'id'         => 'apiMain',
@@ -12,20 +13,25 @@ $config = [
     'bootstrap'  => ['log'],
     'modules'    => $versioningModulesConfig,
     'components' => $appComponentsConfig,
-    'params'     => require(__DIR__ . '/params.php')
+    'params'     => $appParams
 ];
 
 if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'generators' => [
+            'mongoDbModel' => [
+                'class' => 'yii\mongodb\gii\model\Generator'
+            ]
+        ],
+        'allowedIPs' => ['*'],
     ];
 }
 

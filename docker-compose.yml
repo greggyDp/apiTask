@@ -21,15 +21,17 @@ services:
       - mongodb
     links:
       - mongodb
+    build: ./php-fpm
   mongodb:
-    image: mongo:latest
-    build: ./mongodb
+    image: alexpunct/mongo:3.4
     container_name: mongodb
     volumes:
       - ./mongodb/:/data/mongodb
+    ports:
+      - "27017:27017"
     environment:
-      - MONGODB_ADMIN_USER=admin
-      - MONGODB_ADMIN_PASS=admin
-      - MONGODB_APPLICATION_DATABASE=api
-      - MONGODB_APPLICATION_USER=adminapi
-      - MONGODB_APPLICATION_PASS=admin
+      MONGODB_ADMIN_USER: 'admin'
+      MONGODB_ADMIN_PASS: 'admin'
+      MONGODB_APPLICATION_DATABASE: 'api'
+      MONGODB_APPLICATION_USER: 'greg'
+      MONGODB_APPLICATION_PASS: 'greg'
