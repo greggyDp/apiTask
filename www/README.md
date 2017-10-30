@@ -1,3 +1,7 @@
+TO INIT APP:
+- install composer and run migrations through php container
+- copy .dist configs witout .dist ext in /config dir of app
+
 Mobile app API, yalantis tech-task
 ============================
 We are creating a mobile app that allows a user to trim videos. User uploads video and defines timing parameters: start time, end time. After that video will be trimmed using that timing.  You will need to create a backend server that will provide an API for this app.
